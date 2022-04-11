@@ -52,7 +52,8 @@ defmodule DakgharWeb.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:absinthe_plug, "~> 1.5.8"},
-      {:absinthe_phoenix, "~> 2.0.2"}
+      {:absinthe_phoenix, "~> 2.0.2"},
+      {:dataloader, "~> 1.0.0"}
     ]
   end
 
