@@ -4,15 +4,20 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
   describe "list all topics" do
     test "success - returns blank for no topics", %{conn: conn} do
       assert %{
-               "data" => data,
-               "errors" => errors
+               "data" => %{"listTopics" => data}
              } =
                conn
                |> run_graphql(GraphQLqueryFactory.list_topics(), %{})
                |> json_response(200)
 
-      assert is_nil(data)
-      assert is_nil(errors)
+      assert data == []
+    end
+
+    test "success - returns blank for no topics without conn" do
+      result =
+        Absinthe.run(GraphQLqueryFactory.list_topics(), DakgharWeb.GraphQL.Schema, variables: %{})
+
+      assert result = {:ok, data: %{"data" => []}}
     end
   end
 end

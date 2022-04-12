@@ -27,13 +27,13 @@ defmodule DakgharWeb.ConnCase do
       alias DakgharWeb.Router.Helpers, as: Routes
       alias DakgharWeb.GraphQLqueryFactory
 
+      # The default endpoint for testing
+      @endpoint DakgharWeb.Endpoint
+
       def run_graphql(conn, query_or_mutation, variables \\ %{}) do
         conn
         |> post("/graphql", %{query: query_or_mutation, variables: variables})
       end
-
-      # The default endpoint for testing
-      @endpoint DakgharWeb.Endpoint
     end
   end
 
