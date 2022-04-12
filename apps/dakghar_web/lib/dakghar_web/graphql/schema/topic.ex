@@ -6,7 +6,9 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchema do
   alias DakgharWeb.GraphQL.Resolvers.TopicResolver
 
   object :topic_queries do
-    field :list_topics, list_of(:topic_item) do
+
+    @desc "All the possible topics we know."
+    field :list_topics, list_of(:topic_item)do
       resolve(&TopicResolver.list_topics/2)
     end
   end
