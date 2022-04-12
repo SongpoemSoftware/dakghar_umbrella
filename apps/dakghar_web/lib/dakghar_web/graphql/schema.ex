@@ -1,4 +1,4 @@
-defmodule DakgharWeb.Schema do
+defmodule DakgharWeb.GraphQL.Schema do
   use Absinthe.Schema
 
   alias DakgharWeb.GraphQL.Schema.TopicSchema

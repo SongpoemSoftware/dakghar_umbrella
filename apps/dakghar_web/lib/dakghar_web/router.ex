@@ -21,9 +21,17 @@ defmodule DakgharWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", DakgharWeb do
-  #   pipe_through :api
-  # end
+  scope "/graphql" do
+    pipe_through :api
+
+    # forward "/api", Absinthe.Plug, schema: DakgharWeb.GraphQL.Schema
+
+    forward "/", Absinthe.Plug.GraphiQL,
+      schema: DakgharWeb.GraphQL.Schema,
+      interface: :simple
+
+    # simple vs playground ENV specific
+  end
 
   # Enables LiveDashboard only for development
   #
