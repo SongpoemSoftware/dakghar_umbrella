@@ -8,6 +8,8 @@ defmodule Dakghar.Topics.Model.Topic do
   end
 
   def create(params) when is_map(params) do
+    IO.inspect(params, label: "input api params..........")
+
     %Topic{}
     |> Topic.changeset(params)
     |> Repo.insert()

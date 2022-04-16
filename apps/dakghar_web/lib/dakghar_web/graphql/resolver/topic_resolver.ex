@@ -4,4 +4,11 @@ defmodule DakgharWeb.GraphQL.Resolvers.TopicResolver do
   def list_topics(_, _) do
     {:ok, Topic.list_all()}
   end
+
+  def create(%{input: params}, _) do
+    case Topic.create(params) do
+      {:error, _} -> {:error, "Could not create Topic"}
+      {:ok, _} = success -> success
+    end
+  end
 end

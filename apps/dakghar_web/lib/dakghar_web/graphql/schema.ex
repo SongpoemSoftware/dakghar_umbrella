@@ -8,4 +8,8 @@ defmodule DakgharWeb.GraphQL.Schema do
   query do
     import_fields(:topic_queries)
   end
+
+  mutation do
+    import_fields(:topic_mutations)
+  end
 end

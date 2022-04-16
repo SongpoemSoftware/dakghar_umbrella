@@ -4,9 +4,20 @@ defmodule DakgharWeb.GraphQLqueryFactory do
   def list_topics do
     """
     query{listTopics {
-      code
-      name
+      title
+      difficulty
     }}
+    """
+  end
+
+  def add_topic do
+    """
+    mutation CreateTopic($input: TopicInput!) {
+      createTopic(input: $input) {
+        difficulty
+        title
+      }
+    }
     """
   end
 end

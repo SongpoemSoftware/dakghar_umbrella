@@ -20,4 +20,19 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
       assert result = {:ok, data: %{"data" => []}}
     end
   end
+
+  describe "add a topic" do
+    test "success - with all the needed params", %{conn: conn} do
+      arguments = %{
+        input: %{
+          uniq_code_of_topic: "abc-def",
+          name_of_topic: "ititititit",
+          difficulty: 4
+        }
+      }
+
+      conn
+      |> run_graphql(GraphQLqueryFactory.add_topic(), arguments)
+    end
+  end
 end
