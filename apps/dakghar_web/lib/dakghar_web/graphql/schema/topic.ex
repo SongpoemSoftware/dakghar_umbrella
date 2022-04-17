@@ -4,6 +4,7 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchema do
   """
   use Absinthe.Schema.Notation
   alias DakgharWeb.GraphQL.Resolvers.TopicResolver
+  alias DakgharWeb.GraphQL.Middleware.ChangesetErrors
 
   object :topic_queries do
     @desc "All the possible topics we know."
@@ -17,6 +18,7 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchema do
     field :create_topic, :topic_item do
       arg(:input, non_null(:topic_input))
       resolve(&TopicResolver.create/2)
+      middleware(ChangesetErrors)
     end
   end
 

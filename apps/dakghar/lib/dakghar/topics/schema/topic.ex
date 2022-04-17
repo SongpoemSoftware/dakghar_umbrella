@@ -12,10 +12,13 @@ defmodule Dakghar.Topics.Schema.Topic do
     timestamps(type: :utc_datetime)
   end
 
-  @permitted_params ~w(topic_code title description difficulty)a
+  @uniq_params ~w(topic_code title description difficulty)a
+  @optional_params []
+  @permitted_params @uniq_params ++ @optional_params
 
   def changeset(%__MODULE__{} = topic, params) do
     topic
     |> cast(params, @permitted_params)
+    |> validate_required(@uniq_params)
   end
 end
