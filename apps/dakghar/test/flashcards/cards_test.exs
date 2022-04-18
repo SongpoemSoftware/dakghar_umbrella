@@ -8,6 +8,6 @@ defmodule Dakghar.Flashcards.CardTest do
 
   test "changeset" do
     result = %Card{} |> Card.changeset(%{front_content: "something"})
-    assert result.valid? == false
+    assert result.valid? == true
   end
 end

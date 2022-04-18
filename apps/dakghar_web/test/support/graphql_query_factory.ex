@@ -6,6 +6,7 @@ defmodule DakgharWeb.GraphQLqueryFactory do
     query{listTopics {
       title
       difficulty
+      topic_code
     }}
     """
   end
@@ -18,6 +19,15 @@ defmodule DakgharWeb.GraphQLqueryFactory do
         title
       }
     }
+    """
+  end
+
+  def list_cards do
+    """
+    query{listCards(topicCode: $topicCode) {
+      title
+      difficulty
+    }}
     """
   end
 end
