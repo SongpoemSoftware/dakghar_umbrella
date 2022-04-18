@@ -23,8 +23,9 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchema do
   end
 
   input_object :topic_input do
-    field(:title, :string, name: "name_of_topic")
-    field(:topic_code, :string, name: "uniq_code_of_topic")
+    field(:title, non_null(:string))
+    field(:topic_code, non_null(:string))
+    field(:description, non_null(:string))
     field(:difficulty, non_null(:integer))
   end
 

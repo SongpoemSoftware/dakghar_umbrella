@@ -1,4 +1,5 @@
 defmodule DakgharWeb.GraphQL.Middleware.ChangesetErrors do
+  @behaviour Absinthe.Middleware
   @moduledoc """
     return nice error for constrainst failed due to Unique constraint
   """
@@ -7,10 +8,7 @@ defmodule DakgharWeb.GraphQL.Middleware.ChangesetErrors do
     with %{errors: [%Ecto.Changeset{} = changeset]} <- resolution do
       %{
         resolution
-        | value: %{
-            errors: transform_errors(changeset)
-          },
-          errors: []
+        | errors: transform_errors(changeset)
       }
     end
   end

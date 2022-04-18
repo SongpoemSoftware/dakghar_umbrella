@@ -17,7 +17,7 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
       result =
         Absinthe.run(GraphQLqueryFactory.list_topics(), DakgharWeb.GraphQL.Schema, variables: %{})
 
-      assert result = {:ok, data: %{"data" => []}}
+      assert result == {:ok, %{data: %{"listTopics" => []}}}
     end
   end
 
@@ -25,9 +25,10 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
     test "success - with all the needed params", %{conn: conn} do
       arguments = %{
         input: %{
-          uniq_code_of_topic: "abc-def",
-          name_of_topic: "ititititit",
-          difficulty: 4
+          topic_code: "abc-def",
+          title: "ititititit",
+          difficulty: 4,
+          description: "desc"
         }
       }
 
@@ -38,9 +39,10 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
     test "failure - unique topic code", %{conn: conn} do
       arguments = %{
         input: %{
-          uniq_code_of_topic: "abc-def",
-          name_of_topic: "ititititit",
-          difficulty: 4
+          topic_code: "abc-def",
+          title: "ititititit",
+          difficulty: 4,
+          description: "desc"
         }
       }
 
@@ -53,8 +55,9 @@ defmodule DakgharWeb.GraphQL.Schema.TopicSchemaTest do
         |> run_graphql(GraphQLqueryFactory.add_topic(), arguments)
         |> json_response(200)
 
-      IO.inspect(resp, label: "resp resp")
-      # assert resp.errors
+      error = Map.get(resp, "errors") |> hd
+      assert error["key"] == "topic_code"
+      assert error["message"] == ["has already been taken"]
     end
   end
 end
